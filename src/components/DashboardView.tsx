@@ -15,12 +15,14 @@ import {
   CheckCircle2,
   Building,
   Zap,
+  Sparkles,
 } from 'lucide-react';
 
 interface DashboardViewProps {
   bill: BillData;
   onViewBillDetails: (periodName: string) => void;
   onViewSolutions: () => void;
+  onViewForecast?: () => void;
   onAddNewBill: () => void;
   onOpenPdfReport: () => void;
 }
@@ -29,6 +31,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   bill,
   onViewBillDetails,
   onViewSolutions,
+  onViewForecast,
   onAddNewBill,
   onOpenPdfReport,
 }) => {
@@ -332,6 +335,38 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Future Bill Forecast Card */}
+      {onViewForecast && (
+        <div className="bg-white border-2 border-emerald-500/40 hover:border-emerald-600 rounded-2xl p-4 sm:p-5 shadow-xs transition-all text-right flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#006948] flex items-center justify-center border border-emerald-200 shrink-0">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-0.5">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900">
+                  پیش‌بینی هوشمند قبض دوره آینده (مهر ۱۴۰۳)
+                </h3>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-[#006948] text-[10px] font-bold border border-emerald-200">
+                  ماژول جدید
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                محاسبه پیش‌بینانه مبلغ صورتحساب بر اساس تغییر فصل و شبیه‌سازی سود خالص حذف جریمه توان راکتیو.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onViewForecast}
+            className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#006948] hover:bg-[#00855d] text-white font-bold text-xs inline-flex items-center justify-center gap-1.5 transition-all shadow-xs shrink-0 cursor-pointer"
+          >
+            <span>مشاهده پیش‌بینی</span>
+            <ArrowDownLeft className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Bill Archive List */}
       <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs">

@@ -7,6 +7,7 @@ import {
   FileText,
   LayoutDashboard,
   Cpu,
+  Sparkles,
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -31,6 +32,12 @@ export const MobileTabBar: React.FC<NavigationProps> = ({
       label: 'گزارش و ROI',
       icon: TrendingDown,
       badge: null,
+    },
+    {
+      id: 'forecast' as ActiveTab,
+      label: 'پیش‌بینی آینده',
+      icon: Sparkles,
+      badge: 'جدید',
     },
     {
       id: 'solutions' as ActiveTab,
@@ -61,7 +68,7 @@ export const MobileTabBar: React.FC<NavigationProps> = ({
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative min-w-[56px] ${
+            className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative min-w-[52px] ${
               isActive
                 ? 'text-[#006948] font-bold'
                 : 'text-slate-500 hover:text-slate-800 font-medium'
@@ -112,6 +119,12 @@ export const DesktopSidebar: React.FC<NavigationProps> = ({
       label: 'گزارش و عارضه‌یابی تفکیکی',
       icon: TrendingDown,
       desc: 'جریمه راکتیو و بهای پیک بار',
+    },
+    {
+      id: 'forecast' as ActiveTab,
+      label: 'پیش‌بینی قبض آینده (Forecast)',
+      icon: Sparkles,
+      desc: 'برآورد روند فصلی و جریمه راکتیو',
     },
     {
       id: 'dashboard' as ActiveTab,

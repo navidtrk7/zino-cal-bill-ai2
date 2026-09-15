@@ -19,12 +19,14 @@ interface ReportsRoiViewProps {
   bill: BillData;
   onViewSolutions: () => void;
   onViewAudit: () => void;
+  onViewForecast?: () => void;
 }
 
 export const ReportsRoiView: React.FC<ReportsRoiViewProps> = ({
   bill,
   onViewSolutions,
   onViewAudit,
+  onViewForecast,
 }) => {
   // Cos phi calculations for circular gauge
   const gaugeRadius = 46;
@@ -348,6 +350,44 @@ export const ReportsRoiView: React.FC<ReportsRoiViewProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Future Bill Forecast Card */}
+      {onViewForecast && (
+        <div className="bg-white border-2 border-emerald-500/40 hover:border-emerald-600 rounded-2xl p-4 sm:p-5 shadow-sm transition-all text-right relative overflow-hidden">
+          <div className="absolute top-0 left-0 bg-[#006948] text-white text-[10px] font-bold px-3 py-1 rounded-br-xl">
+            ماژول هوشمند جدید
+          </div>
+          <div className="flex items-start gap-3">
+            <div className="w-11 h-11 rounded-xl bg-emerald-50 text-[#006948] flex items-center justify-center border border-emerald-200 shrink-0">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-xs sm:text-sm font-black text-slate-900">
+                  پیش‌بینی صورتحساب دوره آینده (FutureBillForecast)
+                </h3>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                برآورد مبلغ قبض ماه بعد با احتساب تغییرات فصلی و مدل‌سازی اثر حذف جریمه توان راکتیو ({bill.reactivePenalty.toLocaleString('fa-IR')} تومان).
+              </p>
+
+              <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-emerald-800 font-mono">
+                  پتانسیل کاهش تا ۲۸٪ در صورتحساب آتی
+                </span>
+                <button
+                  type="button"
+                  onClick={onViewForecast}
+                  className="px-3.5 py-1.5 rounded-xl bg-[#006948] hover:bg-[#00855d] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                >
+                  <span>ورود به ماژول پیش‌بینی</span>
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Green Energy Banner */}
       <div className="bg-linear-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-4 flex items-center gap-3">

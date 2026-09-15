@@ -9,6 +9,7 @@ import { ReportsRoiView } from './components/ReportsRoiView';
 import { DashboardView } from './components/DashboardView';
 import { SolutionsView } from './components/SolutionsView';
 import { AuditView } from './components/AuditView';
+import { FutureBillForecast } from './components/FutureBillForecast';
 import { OfficialReportModal } from './components/OfficialReportModal';
 import { ManualEditModal } from './components/ManualEditModal';
 import { BillPreviewModal } from './components/BillPreviewModal';
@@ -57,6 +58,16 @@ export default function App() {
             bill={currentBill}
             onViewSolutions={() => setActiveTab('solutions')}
             onViewAudit={() => setActiveTab('audit')}
+            onViewForecast={() => setActiveTab('forecast')}
+          />
+        );
+      case 'forecast':
+        return (
+          <FutureBillForecast
+            bill={currentBill}
+            onViewSolutions={() => setActiveTab('solutions')}
+            onViewAudit={() => setActiveTab('audit')}
+            onOpenReport={() => setIsOfficialReportOpen(true)}
           />
         );
       case 'dashboard':
@@ -67,6 +78,7 @@ export default function App() {
               setActiveTab('ocr-result');
             }}
             onViewSolutions={() => setActiveTab('solutions')}
+            onViewForecast={() => setActiveTab('forecast')}
             onAddNewBill={() => setActiveTab('upload')}
             onOpenPdfReport={() => setIsOfficialReportOpen(true)}
           />

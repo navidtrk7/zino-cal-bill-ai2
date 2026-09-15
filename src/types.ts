@@ -74,9 +74,28 @@ export type ActiveTab =
   | 'upload'
   | 'ocr-result'
   | 'reports-roi'
+  | 'forecast'
   | 'dashboard'
   | 'solutions'
   | 'audit'
   | 'official-report';
+
+export interface ForecastParams {
+  targetMonth: string;
+  seasonalTrendPercent: number; // e.g. -22%
+  seasonalPreset: 'autumn-mild' | 'late-heat' | 'early-cold' | 'custom';
+  powerFactorCorrection: 'none' | 'partial' | 'zino-smart'; // none: current cosPhi, zino: 0.95+
+  peakShiftPercent: number; // 0% to 30% shift to low peak
+}
+
+export interface ProjectedBillItem {
+  baseEnergyCost: number;
+  peakHoursCost: number;
+  reactivePenalty: number;
+  taxAndDuties: number;
+  totalAmount: number;
+  activeEnergyTotal: number;
+  cosPhi: number;
+}
 
 export type DisplayMode = 'responsive' | 'mobile-view' | 'desktop-view';
