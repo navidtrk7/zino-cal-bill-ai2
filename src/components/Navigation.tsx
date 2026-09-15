@@ -60,7 +60,7 @@ export const MobileTabBar: React.FC<NavigationProps> = ({
   ];
 
   return (
-    <nav className="w-full bg-white border-t border-slate-200 py-1.5 px-2 flex items-center justify-around z-30 select-none">
+    <nav className="w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-1.5 px-2 flex items-center justify-around z-30 select-none transition-colors">
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
@@ -70,12 +70,12 @@ export const MobileTabBar: React.FC<NavigationProps> = ({
             onClick={() => setActiveTab(tab.id)}
             className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative min-w-[52px] ${
               isActive
-                ? 'text-[#006948] font-bold'
-                : 'text-slate-500 hover:text-slate-800 font-medium'
+                ? 'text-[#006948] dark:text-emerald-400 font-bold'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium'
             }`}
           >
             {isActive && (
-              <span className="absolute -top-1.5 w-6 h-0.5 bg-[#006948] rounded-full" />
+              <span className="absolute -top-1.5 w-6 h-0.5 bg-[#006948] dark:bg-emerald-400 rounded-full" />
             )}
             <div className="relative">
               <Icon
@@ -153,8 +153,8 @@ export const DesktopSidebar: React.FC<NavigationProps> = ({
   ];
 
   return (
-    <aside className="w-64 bg-white border-l border-slate-200 flex flex-col p-4 shrink-0">
-      <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">
+    <aside className="w-64 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col p-4 shrink-0 transition-colors">
+      <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 px-2">
         منوی سامانه‌های تحلیلی زینو
       </div>
       <div className="flex flex-col gap-1">
@@ -167,15 +167,15 @@ export const DesktopSidebar: React.FC<NavigationProps> = ({
               onClick={() => setActiveTab(item.id)}
               className={`flex items-start gap-3 p-2.5 rounded-xl text-right transition-all group ${
                 isActive
-                  ? 'bg-emerald-50 text-[#006948] font-bold border border-emerald-200/70 shadow-xs'
-                  : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900 border border-transparent'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/50 text-[#006948] dark:text-emerald-400 font-bold border border-emerald-200/70 dark:border-emerald-800 shadow-xs'
+                  : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white border border-transparent'
               }`}
             >
               <div
                 className={`p-1.5 rounded-lg mt-0.5 transition-colors ${
                   isActive
                     ? 'bg-[#006948] text-white'
-                    : 'bg-slate-100 text-slate-600 group-hover:bg-slate-200'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-slate-200 dark:group-hover:bg-slate-700'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -184,7 +184,7 @@ export const DesktopSidebar: React.FC<NavigationProps> = ({
                 <span className="text-xs font-semibold leading-snug">
                   {item.label}
                 </span>
-                <span className="text-[10px] text-slate-400 group-hover:text-slate-500 mt-0.5">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 group-hover:text-slate-500 dark:group-hover:text-slate-400 mt-0.5">
                   {item.desc}
                 </span>
               </div>
@@ -193,16 +193,16 @@ export const DesktopSidebar: React.FC<NavigationProps> = ({
         })}
       </div>
 
-      <div className="mt-auto pt-4 border-t border-slate-200">
-        <div className="bg-emerald-50/70 rounded-xl p-3 border border-emerald-200/60">
-          <div className="flex items-center gap-2 text-emerald-800 text-xs font-bold mb-1">
+      <div className="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+        <div className="bg-emerald-50/70 dark:bg-emerald-950/40 rounded-xl p-3 border border-emerald-200/60 dark:border-emerald-800/60">
+          <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-1">
             <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
             <span>دپارتمان ممیزی فنی زینو</span>
           </div>
-          <p className="text-[11px] text-slate-600 leading-relaxed">
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
             محاسبات منطبق با آخرین الگوریتم ابلاغی تعرفه شرکت توانیر.
           </p>
-          <div className="mt-2 text-[10px] font-mono font-medium text-emerald-700">
+          <div className="mt-2 text-[10px] font-mono font-medium text-emerald-700 dark:text-emerald-400">
             تلفن هماهنگی: ۰۲۱-۸۸۷۸۵۹۵۶
           </div>
         </div>

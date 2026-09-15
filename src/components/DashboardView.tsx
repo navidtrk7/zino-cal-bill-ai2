@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BillData } from '../types';
 import { historicalPeriods } from '../data/mockData';
+import { DailyEnergyConsumptionChart } from './DailyEnergyConsumptionChart';
+import { AiAssistantCard } from './AiAssistantCard';
 import {
   Calendar,
   ArrowDownLeft,
@@ -142,6 +144,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </div>
 
+      {/* Interactive AI Assistant: Voice, Chatbot & Transcription */}
+      <AiAssistantCard bill={bill} />
+
       {/* 6-Month Stacked Consumption & Cost Chart */}
       <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs">
         <div className="flex items-center justify-between mb-4">
@@ -240,6 +245,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </span>
         </div>
       </div>
+
+      {/* Daily Energy Profile Chart with Recharts */}
+      <DailyEnergyConsumptionChart bill={bill} />
 
       {/* Two Periods Direct Comparison Card (شهریور vs مرداد) */}
       <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs">

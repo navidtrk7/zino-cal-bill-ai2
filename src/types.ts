@@ -99,3 +99,5 @@ export interface ProjectedBillItem {
 }
 
 export type DisplayMode = 'responsive' | 'mobile-view' | 'desktop-view';
+
+export type ThemeMode = 'light' | 'dark';

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -16,6 +18,114 @@
   body {
     font-family: 'Vazirmatn', system-ui, sans-serif;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.dark body {
+    background-color: #0b1322;
+    color: #f1f5f9;
+  }
+
+  /* Universal low-strain dark mode mappings */
+  html.dark .bg-white {
+    background-color: #111c30;
+  }
+
+  html.dark .bg-slate-50 {
+    background-color: #172339;
+  }
+
+  html.dark .bg-slate-100 {
+    background-color: #1c2b44;
+  }
+
+  html.dark .border-slate-100,
+  html.dark .border-slate-200,
+  html.dark .border-slate-200\/80,
+  html.dark .border-slate-200\/60,
+  html.dark .border-slate-200\/70 {
+    border-color: #243552;
+  }
+
+  html.dark .text-slate-900,
+  html.dark .text-slate-800 {
+    color: #f8fafc;
+  }
+
+  html.dark .text-slate-700 {
+    color: #e2e8f0;
+  }
+
+  html.dark .text-slate-600 {
+    color: #cbd5e1;
+  }
+
+  html.dark .text-slate-500 {
+    color: #94a3b8;
+  }
+
+  html.dark .text-slate-400 {
+    color: #64748b;
+  }
+
+  /* Status accent tints for low eye strain */
+  html.dark .bg-amber-50,
+  html.dark .bg-amber-50\/80 {
+    background-color: rgba(245, 158, 11, 0.12);
+  }
+
+  html.dark .bg-red-50,
+  html.dark .bg-red-50\/80 {
+    background-color: rgba(239, 68, 68, 0.12);
+  }
+
+  html.dark .bg-emerald-50,
+  html.dark .bg-emerald-50\/80,
+  html.dark .bg-emerald-50\/70 {
+    background-color: rgba(16, 185, 129, 0.12);
+  }
+
+  html.dark .border-amber-200,
+  html.dark .border-amber-200\/60 {
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+
+  html.dark .border-red-200,
+  html.dark .border-red-200\/60 {
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  html.dark .border-emerald-200,
+  html.dark .border-emerald-200\/60,
+  html.dark .border-emerald-200\/70 {
+    border-color: rgba(16, 185, 129, 0.3);
+  }
+
+  html.dark .text-amber-900,
+  html.dark .text-amber-800 {
+    color: #fcd34d;
+  }
+
+  html.dark .text-red-900,
+  html.dark .text-red-800 {
+    color: #fca5a5;
+  }
+
+  html.dark .text-emerald-900,
+  html.dark .text-emerald-800 {
+    color: #6ee7b7;
+  }
+
+  html.dark input,
+  html.dark select,
+  html.dark textarea {
+    background-color: #172339;
+    border-color: #243552;
+    color: #f8fafc;
   }
 }
 

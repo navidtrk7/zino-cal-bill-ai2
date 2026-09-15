@@ -13,6 +13,8 @@ import { FutureBillForecast } from './components/FutureBillForecast';
 import { OfficialReportModal } from './components/OfficialReportModal';
 import { ManualEditModal } from './components/ManualEditModal';
 import { BillPreviewModal } from './components/BillPreviewModal';
+import { FloatingAiButton } from './components/FloatingAiButton';
+import { AiAssistantModal } from './components/AiAssistantModal';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('upload');
@@ -23,6 +25,8 @@ export default function App() {
   const [isOfficialReportOpen, setIsOfficialReportOpen] = useState(false);
   const [isManualEditOpen, setIsManualEditOpen] = useState(false);
   const [isBillPreviewOpen, setIsBillPreviewOpen] = useState(false);
+  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [aiModalTab, setAiModalTab] = useState<'chat' | 'live' | 'transcribe'>('chat');
 
   // Handle bill selection from preset or scan
   const handleSelectBill = (bill: BillData) => {
@@ -138,7 +142,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans antialiased selection:bg-[#006948]/20 selection:text-[#006948]">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0b1322] text-slate-900 dark:text-slate-100 flex flex-col font-sans antialiased selection:bg-[#006948]/20 selection:text-[#006948] transition-colors">
       {/* Top Main Navigation Header */}
       <Header
         activeTab={activeTab}
@@ -146,42 +150,46 @@ export default function App() {
         displayMode={displayMode}
         setDisplayMode={setDisplayMode}
         onOpenOfficialReport={() => setIsOfficialReportOpen(true)}
+        onOpenAiAssistant={() => {
+          setAiModalTab('chat');
+          setIsAiModalOpen(true);
+        }}
       />
 
       {/* Main Content Area based on Display Mode */}
-      {displayMode === 'mobile' ? (
+      {displayMode === 'mobile' || displayMode === 'mobile-view' ? (
         /* Mobile Device Frame Mockup */
-        <main className="flex-1 flex items-center justify-center p-2 sm:p-6 bg-slate-200/70">
-          <div className="w-full max-w-[420px] h-[844px] max-h-[90vh] bg-white rounded-[40px] shadow-2xl border-8 border-slate-800 flex flex-col overflow-hidden relative">
+        <main className="flex-1 flex items-center justify-center p-2 sm:p-6 bg-slate-200/70 dark:bg-slate-950/80 transition-colors">
+          <div className="w-full max-w-[420px] h-[844px] max-h-[90vh] bg-white dark:bg-slate-900 rounded-[40px] shadow-2xl border-8 border-slate-800 dark:border-slate-700 flex flex-col overflow-hidden relative transition-colors">
             {/* Mobile Top Status Bar */}
-            <div className="h-9 bg-white shrink-0 px-6 flex items-center justify-between text-[11px] font-mono font-bold text-slate-800 select-none z-30 border-b border-slate-100">
+            <div className="h-9 bg-white dark:bg-slate-900 shrink-0 px-6 flex items-center justify-between text-[11px] font-mono font-bold text-slate-800 dark:text-slate-200 select-none z-30 border-b border-slate-100 dark:border-slate-800">
               <span>9:41</span>
-              <div className="w-20 h-4 bg-slate-900 rounded-full mx-auto" />
+              <div className="w-20 h-4 bg-slate-900 dark:bg-slate-800 rounded-full mx-auto" />
               <div className="flex items-center gap-1.5 text-xs">
                 <span>5G</span>
-                <span className="w-5 h-2.5 border border-slate-800 rounded-xs inline-block relative p-0.5">
-                  <span className="w-full h-full bg-slate-800 block rounded-xs"></span>
+                <span className="w-5 h-2.5 border border-slate-800 dark:border-slate-300 rounded-xs inline-block relative p-0.5">
+                  <span className="w-full h-full bg-slate-800 dark:bg-slate-300 block rounded-xs"></span>
                 </span>
               </div>
             </div>
 
             {/* Mobile App Title Bar */}
-            <div className="bg-white border-b border-slate-100 px-4 py-2 flex items-center justify-between shrink-0">
+            <div className="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-4 py-2 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-1.5">
                 <div className="w-6 h-6 rounded-md bg-[#006948] flex items-center justify-center text-white text-[10px] font-bold">
                   Z
                 </div>
-                <span className="text-xs font-black text-slate-800">
+                <span className="text-xs font-black text-slate-800 dark:text-white">
                   قبض‌خوان هوشمند زینو
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-[#006948] bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-[10px] font-mono text-[#006948] dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-bold">
                 تعرفه ۱۴۰۵
               </span>
             </div>
 
             {/* Scrollable View Container */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f8fafc] p-2">
+            <div className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f8fafc] dark:bg-[#0b1322] p-2 transition-colors">
               {renderActiveView()}
             </div>
 
@@ -193,11 +201,11 @@ export default function App() {
             />
           </div>
         </main>
-      ) : displayMode === 'desktop' ? (
+      ) : displayMode === 'desktop' || displayMode === 'desktop-view' ? (
         /* Desktop Workspace with Sidebar */
         <div className="flex-1 flex max-w-7xl w-full mx-auto overflow-hidden">
           <DesktopSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-          <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#f8fafc]">
+          <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#f8fafc] dark:bg-[#0b1322] transition-colors">
             {renderActiveView()}
           </main>
         </div>
@@ -209,7 +217,7 @@ export default function App() {
             <DesktopSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
           </div>
 
-          <main className="flex-1 p-2 sm:p-4 pb-20 md:pb-6 overflow-y-auto">
+          <main className="flex-1 p-2 sm:p-4 pb-20 md:pb-6 overflow-y-auto bg-[#f8fafc] dark:bg-[#0b1322] transition-colors">
             {renderActiveView()}
           </main>
 
@@ -244,6 +252,22 @@ export default function App() {
         bill={currentBill}
         isOpen={isBillPreviewOpen}
         onClose={() => setIsBillPreviewOpen(false)}
+      />
+
+      {/* Global Floating AI Button on all pages */}
+      <FloatingAiButton
+        onOpen={(tab) => {
+          setAiModalTab(tab || 'chat');
+          setIsAiModalOpen(true);
+        }}
+      />
+
+      {/* Unified AI Assistant Modal / Drawer */}
+      <AiAssistantModal
+        bill={currentBill}
+        isOpen={isAiModalOpen}
+        onClose={() => setIsAiModalOpen(false)}
+        initialTab={aiModalTab}
       />
     </div>
   );
