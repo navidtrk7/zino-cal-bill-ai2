@@ -1,0 +1,6 @@
+{
+  "name": "سامانه تحلیل هوشمند قبض زینو",
+  "description": "سامانه هوشمند تحلیل قبوض برق، عارضه‌یابی توان راکتیو و اوج‌بار، شبیه‌سازی مالی ROI و ممیزی انرژی زینو بر اساس تعرفه توانیر",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
